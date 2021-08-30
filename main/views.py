@@ -39,4 +39,23 @@ def add_movies(request):
             return redirect("main:home")
     else:
         form = MovieForm()
-    return render(request, 'main/addmovies.html', {"form": form})
+    return render(request, 'main/addmovies.html', {"form": form,
+                                                    "controller": "Add Movies"})
+
+# edit the movie
+def edit_movies(request, id):
+    # get the movie linked with id
+    movie = Movie.objects.get(id=id)
+
+    # form check
+    if request.method == "POST":
+        form = MovieForm(request.POST or None, instance=movie)
+        # check if form is valid
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            return redirect ("main:detail", id)
+    
+    else: 
+        form = MovieForm(instance=movie)
+    return render(request, 'main/addmovies.html', {"form": form, "controller": "Edit Movies"})
