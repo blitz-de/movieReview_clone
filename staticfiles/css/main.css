@@ -1,0 +1,11 @@
+body {
+    background-color: #1f1d1d;
+}
+
+#backdrop{
+    background-color: #f8f9fa;
+}
+.center-containter{
+    width:900px;
+    margin-left: 10%;
+}
